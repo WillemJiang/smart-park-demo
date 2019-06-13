@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Fruit REST service</title>
+    <title>VisitorInfo service</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.8/wing.min.css"/>
     <!-- Load AngularJS -->
     <script src="https://cdn.bootcss.com/angular.js/1.4.8/angular.min.js"></script>
@@ -13,14 +13,13 @@
         //Initialize page with default data which is blank in this example
         $scope.fruits = [];
         $scope.form = {
-          visitorName: "",
-          status: ""
+          visitorName: ""
         };
         //Now load the data from server
         _refreshPageData();
         //HTTP POST methods for add fruits
         $scope.add = function () {
-          var data = { "visitorName": $scope.form.visitorName, "status": "RESERVED" };
+          var data = { "visitorName": $scope.form.visitorName };
           $http({
             method: "POST",
             url: '/visitors/checkIn',
@@ -52,7 +51,6 @@
         //Clear the form
         function _clearForm() {
           $scope.form.visitorName = "";
-          $scope.form.status = "";
         }
       });
     </script>
@@ -67,20 +65,17 @@
         <div class="row">
             <div class="col-6"><input type="text" placeholder="VisitorName" ng-model="form.visitorName" size="60"/></div>
         </div>
-        <div class="row">
-            <div class="col-6"><input type="text" placeholder="Status" ng-model="form.status" size="60"/></div>
-        </div>
         <input type="submit" value="Save"/>
     </form>
 
     <h3>Visitor List</h3>
     <div class="row">
-        <div class="col-4">VisitorName</div>
-        <div class="col-8">Status</div>
+        <div class="col-4">Visitor Name</div>
+        <div class="col-8">Visit Date</div>
     </div>
     <div class="row" ng-repeat="visitor in visitors">
         <div class="col-4">{{ visitor.visitorName }}</div>
-        <div class="col-8">{{ visitor.status }}</div>
+        <div class="col-8">{{ visitor.visitDate }}</div>
     </div>
 </div>
 

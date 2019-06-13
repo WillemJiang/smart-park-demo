@@ -9,19 +9,19 @@ public class VisitorInfo {
     private String visitorName;
 
     @JsonbDateFormat("yyyy-MM-dd HH:mm:ss a z")
-    private Date date;
+    private Date visitDate;
 
     public VisitorInfo() {
     }
 
     public VisitorInfo(String visitorName, Date date) {
         this.visitorName = visitorName;
-        this.date = date;
+        this.visitDate = date;
     }
 
     public VisitorInfo(Visitor visitor) {
         this.visitorName = visitor.getVisitorName();
-        this.date = new Date();
+        this.visitDate = new Date();
     }
 
     public String getVisitorName() {
@@ -32,12 +32,12 @@ public class VisitorInfo {
         this.visitorName = visitorName;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getVisitDate() {
+        return visitDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setVisitDate(Date visitDate) {
+        this.visitDate = visitDate;
     }
 
 
@@ -47,11 +47,11 @@ public class VisitorInfo {
         if (o == null || getClass() != o.getClass()) return false;
         VisitorInfo that = (VisitorInfo) o;
         return Objects.equals(visitorName, that.visitorName) &&
-                Objects.equals(date, that.date);
+                Objects.equals(visitDate, that.visitDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(visitorName, date);
+        return Objects.hash(visitorName, visitDate);
     }
 }

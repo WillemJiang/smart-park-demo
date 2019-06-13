@@ -16,7 +16,7 @@ public class VisitorInfoResourceTest {
           .when().get("/visitors")
           .then()
              .statusCode(200)
-             .body(is("[{\"date\":\"2019-06-08 16:00:00 PM UTC\",\"visitorName\":\"Bob\"}]"));
+             .body(is("[{\"visitDate\":\"2019-06-08 16:00:00 PM UTC\",\"visitorName\":\"Bob\"}]"));
 
     }
 
@@ -29,7 +29,7 @@ public class VisitorInfoResourceTest {
             .then()
                 .statusCode(200)
                 .body("visitorName", is("Alex"))
-                .body("date", endsWith("UTC"));
+                .body("visitDate", endsWith("UTC"));
     }
 
 }

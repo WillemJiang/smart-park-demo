@@ -16,6 +16,6 @@
   </properties>
   <modules>
     <module>visitor-service</module>
-    <module>wechat-service</module>
+    <module>notification-service</module>
   </modules>
 </project>
