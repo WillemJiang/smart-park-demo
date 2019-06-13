@@ -20,10 +20,10 @@
         _refreshPageData();
         //HTTP POST methods for add fruits
         $scope.add = function () {
-          var data = { "visitorName": $scope.form.name, "status": "RESERVED" };
+          var data = { "visitorName": $scope.form.visitorName, "status": "RESERVED" };
           $http({
             method: "POST",
-            url: '/visitors',
+            url: '/visitors/checkIn',
             data: angular.toJson(data),
             headers: {
               'Content-Type': 'application/json'
@@ -68,7 +68,7 @@
             <div class="col-6"><input type="text" placeholder="VisitorName" ng-model="form.visitorName" size="60"/></div>
         </div>
         <div class="row">
-            <div class="col-6"><input type="text" placeholder="Description" ng-model="form.description" size="60"/></div>
+            <div class="col-6"><input type="text" placeholder="Status" ng-model="form.status" size="60"/></div>
         </div>
         <input type="submit" value="Save"/>
     </form>
@@ -79,7 +79,7 @@
         <div class="col-8">Status</div>
     </div>
     <div class="row" ng-repeat="visitor in visitors">
-        <div class="col-4">{{ visitor.name }}</div>
+        <div class="col-4">{{ visitor.visitorName }}</div>
         <div class="col-8">{{ visitor.status }}</div>
     </div>
 </div>

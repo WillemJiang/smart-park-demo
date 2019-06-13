@@ -2,9 +2,7 @@ package org.acme.smart.park;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Set;
+import java.util.*;
 
 @Path("/visitors")
 @Produces(MediaType.APPLICATION_JSON)
@@ -15,7 +13,8 @@ public class VisitorInfoResource {
     
 
     public VisitorInfoResource() {
-        visitorInfos.add(new VisitorInfo("Bob", Status.RESERVED));
+        //Calendar calendar = new Calendar.Builder().setDate(2019, 6, 10).build();
+        visitorInfos.add(new VisitorInfo("Bob", new Date(119, 5, 9)));
     }
 
     @GET
@@ -24,13 +23,9 @@ public class VisitorInfoResource {
     }
 
     @POST
-    @Path("/verify")
-    public VisitorInfo verify(VisitorInfo visitorInfo) {
-        if (visitorInfo.getVisitorName().equals("Alex")) {
-            visitorInfo.setStatus(Status.RESERVED);
-        } else {
-            visitorInfo.setStatus(Status.NEEDTO_NOTIFY);
-        }
+    @Path("/checkIn")
+    public VisitorInfo checkIn(Visitor visitor) {
+        VisitorInfo visitorInfo = new VisitorInfo(visitor);
         visitorInfos.add(visitorInfo);
         return visitorInfo;
     }

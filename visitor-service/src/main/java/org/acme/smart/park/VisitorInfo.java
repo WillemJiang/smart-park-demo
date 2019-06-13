@@ -1,19 +1,27 @@
 package org.acme.smart.park;
 
+import javax.json.bind.annotation.JsonbDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class VisitorInfo {
 
     private String visitorName;
 
-    private Status status;
+    @JsonbDateFormat("yyyy-MM-dd HH:mm:ss a z")
+    private Date date;
 
     public VisitorInfo() {
     }
 
-    public VisitorInfo(String visitorName, Status status) {
+    public VisitorInfo(String visitorName, Date date) {
         this.visitorName = visitorName;
-        this.status = status;
+        this.date = date;
+    }
+
+    public VisitorInfo(Visitor visitor) {
+        this.visitorName = visitor.getVisitorName();
+        this.date = new Date();
     }
 
     public String getVisitorName() {
@@ -24,12 +32,12 @@ public class VisitorInfo {
         this.visitorName = visitorName;
     }
 
-    public Status getStatus() {
-        return status;
+    public Date getDate() {
+        return date;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
 
@@ -38,12 +46,12 @@ public class VisitorInfo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VisitorInfo that = (VisitorInfo) o;
-        return visitorName.equals(that.visitorName) &&
-                status == that.status;
+        return Objects.equals(visitorName, that.visitorName) &&
+                Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(visitorName, status);
+        return Objects.hash(visitorName, date);
     }
 }
