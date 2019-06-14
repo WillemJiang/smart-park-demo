@@ -17,5 +17,6 @@
   <modules>
     <module>visitor-service</module>
     <module>notification-service</module>
+    <module>camel-route</module>
   </modules>
 </project>
