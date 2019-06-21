@@ -12,7 +12,7 @@ public class CamelRoute extends RouteBuilder {
   @Value("${visitorService.address:localhost:8080}")
   private String visitorServiceAddress;
 
-  @Value("${notificationService.addresses:localhost:8082}")
+  @Value("${notificationService.address:localhost:8082}")
   private String notificationServiceAddress;
   
 
@@ -41,12 +41,14 @@ public class CamelRoute extends RouteBuilder {
             .when().simple("${body} == \"Hello\"")
                 .transform().simple("VIP ${body}")
             .end()
+        .setHeader("message").simple("Welcome ${body} to robot world")
         .transform().simple("{\"message\":\" ${body} is here.\"}")
         .setHeader(Exchange.HTTP_METHOD, constant(org.apache.camel.component.http4.HttpMethods.POST))
         .setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
         .to("http4://" + notificationServiceAddress + "/notification/notify")
-        .removeHeaders("*")
-        .setBody(constant("OK"));
+        .setBody().simple("${headers.message}")
+            // We need to clean up the header to send out the message
+            .removeHeaders("*");
 
         
   }
