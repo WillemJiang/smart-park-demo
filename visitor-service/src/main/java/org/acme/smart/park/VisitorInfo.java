@@ -47,11 +47,11 @@ public class VisitorInfo {
         if (o == null || getClass() != o.getClass()) return false;
         VisitorInfo that = (VisitorInfo) o;
         return Objects.equals(visitorName, that.visitorName) &&
-                Objects.equals(visitDate, that.visitDate);
+                Objects.equals(visitDate.toString(), that.visitDate.toString());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(visitorName, visitDate);
+        return Objects.hash(visitorName, visitDate.toString());
     }
 }
