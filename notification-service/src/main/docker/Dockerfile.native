@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t quarkus/rest-json .
+# docker build -f src/main/docker/Dockerfile.native -t quarkus/notification-service .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/rest-json
+# docker run -i --rm -p 8080:8080 quarkus/notification-service
 #
 ###
 FROM registry.fedoraproject.org/fedora-minimal

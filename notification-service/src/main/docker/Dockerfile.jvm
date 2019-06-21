@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/rest-json-jvm .
+# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/notification-service-jvm .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/rest-json-jvm
+# docker run -i --rm -p 8080:8080 quarkus/notification-service-jvm
 #
 ###
 FROM fabric8/java-alpine-openjdk8-jre
