@@ -25,31 +25,31 @@ public class CamelRoute extends RouteBuilder {
 
     rest()
         .get("/visitor/{name}")
-        .to("direct:visitorCheckIn");
+        .to("direct:wireTap");
 
-    from("direct:visitorCheckIn")
-        .transform().simple("{\"visitorName\":\"${header.name}\"}")
+    from("direct:wireTap")
+            .transform().simple("${header.name}")
+            .wireTap("seda:visitorService")
+            .transform().simple("OK");
+
+    from("seda:visitorService")
+        .transform().simple("{\"visitorName\":\"${body}\"}")
         .removeHeaders("*")
         .setHeader(Exchange.HTTP_METHOD, constant(org.apache.camel.component.http4.HttpMethods.POST))
         .setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
         .to("http4://" + visitorServiceAddress + "/visitors/checkIn")
         .transform().jsonpath("$.visitorName")
-        .to("direct:notifyService");
+        .to("seda:notificationService");
 
-    from("direct:notifyService")
+    from("seda:notificationService")
         .choice()
-            .when().simple("${body} == \"Hello\"")
+            .when().simple("${body} == \"Alex\"")
                 .transform().simple("VIP ${body}")
             .end()
         .setHeader("message").simple("Welcome ${body} to robot world")
         .transform().simple("{\"message\":\" ${body} is here.\"}")
         .setHeader(Exchange.HTTP_METHOD, constant(org.apache.camel.component.http4.HttpMethods.POST))
         .setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
-        .to("http4://" + notificationServiceAddress + "/notification/notify")
-        .setBody().simple("${headers.message}")
-            // We need to clean up the header to send out the message
-            .removeHeaders("*");
-
-        
+        .to("http4://" + notificationServiceAddress + "/notification/notify");
   }
 }
