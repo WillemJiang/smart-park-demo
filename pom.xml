@@ -23,5 +23,6 @@
     <module>visitor-service</module>
     <module>notification-service</module>
     <module>camel-route</module>
+    <module>camel-k-runtime-routes</module>
   </modules>
 </project>
