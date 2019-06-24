@@ -9,7 +9,7 @@
 
 
 
-![image-20190624205232424](/Users/njiang/work/camel/github/example/smart-park-demo/image-system.png)
+![image-system](image-system.png)
 
 
 
