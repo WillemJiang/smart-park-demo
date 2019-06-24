@@ -56,7 +56,7 @@ find out the visitor name, and say the welcome words from the service response.
 
 It provide visitor checkin service from the restful service url visitor/checkin, the response message has the visitor checkin time information. 
 
-###notification-service
+### notification-service
 
 It's provide the web interface which could be used for the user to register himself,  user can receive the notification, once there is a notification message which is sent to the notification service. 
 
