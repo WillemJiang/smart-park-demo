@@ -1,5 +1,7 @@
 package org.acme.smart.park;
 
+import org.jboss.logging.Logger;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.*;
@@ -8,6 +10,7 @@ import java.util.*;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class VisitorInfoResource {
+    private static final Logger LOGGER = Logger.getLogger(VisitorInfoResource.class);
 
     private Set<VisitorInfo> visitorInfos = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
     
@@ -26,6 +29,7 @@ public class VisitorInfoResource {
     @Path("/checkIn")
     public VisitorInfo checkIn(Visitor visitor) {
         VisitorInfo visitorInfo = new VisitorInfo(visitor);
+        LOGGER.info("Visitor " + visitor.getVisitorName() + "is checked in at " + visitorInfo.getVisitDate() + "!");
         visitorInfos.add(visitorInfo);
         return visitorInfo;
     }
