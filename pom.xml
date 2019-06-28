@@ -15,9 +15,11 @@
     <groovy.version>2.5.7</groovy.version>
     <camel-k-runtime.version>0.3.3</camel-k-runtime.version>
     <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
+    <mycila-license.version>3.0</mycila-license.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    
   </properties>
   <modules>
     <module>visitor-service</module>
@@ -25,4 +27,23 @@
     <module>camel-route</module>
     <module>camel-k-runtime-routes</module>
   </modules>
+  <profiles>
+    <profile>
+      <id>license</id>
+      <build>
+        <defaultGoal>license:format</defaultGoal>
+        <plugins>
+          <plugin>
+            <groupId>com.mycila</groupId>
+            <artifactId>license-maven-plugin</artifactId>
+            <version>${mycila-license.version}</version>
+            <configuration>
+              <header>etc/header.txt</header>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+  </profiles>
 </project>
