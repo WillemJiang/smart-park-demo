@@ -16,6 +16,10 @@
  */
 package org.acme.smart.park;
 
+import javax.websocket.Session;
+
 public interface Broadcaster {
     void broadcast(String message);
+    void addSession(Session session);
+    void removeSession(Session session);
 }

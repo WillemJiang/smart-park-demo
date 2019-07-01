@@ -16,18 +16,39 @@
  */
 package org.acme.smart.park;
 
+import io.quarkus.test.Mock;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import javax.enterprise.inject.Produces;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Mockito.verify;
 
 @QuarkusTest
 public class NotificationServiceTest {
 
+    private static Broadcaster MOCK_BROADCASTER = Mockito.mock(Broadcaster.class);
+
+    @Mock
+    @Produces
+    Broadcaster getMockBroadcaster() {
+        return MOCK_BROADCASTER;
+    }
+    
     @Test
     public void testHelloEndpoint() {
         
+        given()
+                .contentType("application/json")
+                .body("{\"message\":\"Notification message\"}")
+                .when().post("/notification/notify")
+                .then()
+                .statusCode(204);
+        
+        verify(MOCK_BROADCASTER).broadcast("Notification message");
+
     }
 
 }

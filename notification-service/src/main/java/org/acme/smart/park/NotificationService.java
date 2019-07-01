@@ -38,6 +38,7 @@ public class NotificationService {
     @Path("/notify")
     public void notify(Notification notification) {
         // Just send out the notification to the connected client
+        System.out.println(broadcaster);
         broadcaster.broadcast(notification.getMessage());
         LOGGER.info("Send out broadcast message : " + notification.getMessage());
     }
