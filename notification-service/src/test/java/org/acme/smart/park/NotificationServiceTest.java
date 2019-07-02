@@ -29,6 +29,7 @@ import static org.mockito.Mockito.verify;
 @QuarkusTest
 public class NotificationServiceTest {
 
+    // To use the static member for injection
     private static Broadcaster MOCK_BROADCASTER = Mockito.mock(Broadcaster.class);
 
     @Mock
@@ -38,7 +39,8 @@ public class NotificationServiceTest {
     }
     
     @Test
-    public void testHelloEndpoint() {
+    public void testNotifiyEndpoint() {
+        Mockito.reset(MOCK_BROADCASTER);
         
         given()
                 .contentType("application/json")
