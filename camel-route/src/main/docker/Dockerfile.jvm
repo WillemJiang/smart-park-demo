@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.jvm -t camel-route-jvm .
+# docker build -f src/main/docker/Dockerfile.jvm -t smart-park/camel-route-jvm .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 9080:9080 camel-route-jvm
+# docker run -i --rm -p 9080:9080 smart-park/camel-route-jvm
 #
 ###
 FROM fabric8/java-alpine-openjdk8-jre
