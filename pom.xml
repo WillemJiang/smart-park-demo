@@ -27,7 +27,7 @@
   <properties>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <surefire-plugin.version>2.22.0</surefire-plugin.version>
-    <quarkus.version>0.24.0</quarkus.version>
+    <quarkus.version>1.0.0.CR1</quarkus.version>
     <camel.version>2.24.2</camel.version>
     <log4j2.version>2.11.2</log4j2.version>
     <groovy.version>2.5.8</groovy.version>
