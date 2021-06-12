@@ -18,7 +18,7 @@ Then you can use below command to run the container
 docker run -i --rm -p 8080:8080 smart-park/notification-service-jvm
 ```
 
-### How to build and run the native excution binary docker image
+### How to build and run the native execution binary docker image
 
 If you want to build the native execution binary, you need to setup the GraalVM by following the instructions [here](https://quarkus.io/guides/building-native-image-guide).
 
