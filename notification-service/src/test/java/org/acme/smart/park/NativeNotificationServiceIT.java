@@ -12,10 +12,10 @@
  */
 package org.acme.smart.park;
 
-import io.quarkus.test.junit.SubstrateTest;
+import io.quarkus.test.junit.NativeImageTest;
 
-@SubstrateTest
-public class NativeNotificationServiceIT extends NotificationServiceTest {
+@NativeImageTest
+public class NativeNotificationServiceIT extends NotificationServiceITest {
 
     // Execute the same tests but in native mode.
 }

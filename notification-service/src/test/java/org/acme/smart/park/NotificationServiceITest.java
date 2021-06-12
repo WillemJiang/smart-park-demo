@@ -17,7 +17,6 @@ import io.quarkus.test.common.http.TestHTTPResource;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import javax.websocket.*;
 
@@ -26,10 +25,10 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
 import static io.restassured.RestAssured.given;
-import static org.mockito.Mockito.verify;
+
 
 @QuarkusTest
-public class NotificationServiceIT {
+public class NotificationServiceITest {
 
     private static final LinkedBlockingDeque<String> MESSAGES = new LinkedBlockingDeque<>();
 
@@ -37,26 +36,19 @@ public class NotificationServiceIT {
     URI uri;
 
     @Test
-    public void testNotifiyEndpoint() throws Exception {
+    public void testNotifyEndpoint() throws Exception {
+        System.out.println("send out the message to url" + uri);
 
         try(Session session = ContainerProvider.getWebSocketContainer().connectToServer(Client.class, uri)) {
             Assertions.assertEquals("CONNECT", MESSAGES.poll(10, TimeUnit.SECONDS));
             given()
                     .contentType("application/json")
                     .body("{\"message\":\"Notification message\"}")
-                    .when().post("/notification/stu")
+                    .when().post("/notification/notify")
                     .then()
                     .statusCode(204);
-            Assertions.assertEquals("Notification message", MESSAGES.poll(10, TimeUnit.SECONDS));
 
-            given()
-                    .contentType("application/json")
-                    .body("{\"message\":\"Notification message\"}")
-                    .when().post("/notification/otherStu")
-                    .then()
-                    .statusCode(204);
-            // we should not get message here
-            Assertions.assertEquals(null, MESSAGES.poll(10, TimeUnit.SECONDS));
+            Assertions.assertEquals("Notification message", MESSAGES.poll(10, TimeUnit.SECONDS));
         }
     }
 
@@ -71,6 +63,7 @@ public class NotificationServiceIT {
 
         @OnMessage
         void message(String msg) {
+            System.out.println("Get message here");
             MESSAGES.add(msg);
         }
 
