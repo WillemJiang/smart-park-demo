@@ -41,6 +41,9 @@ public class NotificationServiceITest {
 
         try(Session session = ContainerProvider.getWebSocketContainer().connectToServer(Client.class, uri)) {
             Assertions.assertEquals("CONNECT", MESSAGES.poll(10, TimeUnit.SECONDS));
+
+            Assertions.assertEquals("#User: stu joined", MESSAGES.poll(10, TimeUnit.SECONDS));
+            
             given()
                     .contentType("application/json")
                     .body("{\"message\":\"Notification message\"}")
@@ -63,7 +66,6 @@ public class NotificationServiceITest {
 
         @OnMessage
         void message(String msg) {
-            System.out.println("Get message here");
             MESSAGES.add(msg);
         }
 
