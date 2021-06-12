@@ -3,7 +3,7 @@
 #
 # Before building the docker image run:
 #
-# mvn package -Pnative -Dnative-image.docker-build=true
+# mvn package -Pnative -Dquarkus.native.container-build=true
 #
 # Then, build the image with:
 #
@@ -14,14 +14,13 @@
 # docker run -i --rm -p 8080:8080 smart-park/visitor-service
 #
 ###
-FROM alpine:3.10
-
-# install the glibc runtimes which need to be used
-RUN  apk --no-cache add zlib libc6-compat
-
-# copy the application here
+FROM registry.access.redhat.com/ubi8/ubi-minimal:8.3
 WORKDIR /work/
-COPY target/*-runner /work/application
-RUN chmod 775 /work
+RUN chown 1001 /work \
+    && chmod "g+rwX" /work \
+    && chown 1001:root /work
+COPY --chown=1001:root target/*-runner /work/application
+
 EXPOSE 8080
+USER 1001
 CMD ["./application", "-Dquarkus.http.host=0.0.0.0"]

@@ -24,7 +24,7 @@ If you want to build the native execution binary, you need to setup the GraalVM 
 
 1. Before building the docker image run:
 ```
- mvn package -Pnative -Dnative-image.docker-build=true
+ mvn package -Pnative -Dquarkus.native.container-build=true
 ```
 2. Build the image with:
 ```
