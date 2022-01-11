@@ -23,11 +23,12 @@
     <surefire-plugin.version>2.22.0</surefire-plugin.version>
     <quarkus.version>1.13.7.Final</quarkus.version>
     <camel.version>2.25.4</camel.version>
-    <log4j2.version>2.11.2</log4j2.version>
+    <log4j2.version>2.17.1</log4j2.version>
     <groovy.version>2.5.8</groovy.version>
     <camel-k-runtime.version>0.3.3</camel-k-runtime.version>
     <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
     <mycila-license.version>3.0</mycila-license.version>
+    <dependency-check.version>6.5.2</dependency-check.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -39,6 +40,44 @@
     <module>camel-route</module>
     <module>camel-k-runtime-routes</module>
   </modules>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.7.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <version>6.5.2</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <version>6.5.2</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>aggregate</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
+
   <profiles>
     <profile>
       <id>license</id>
