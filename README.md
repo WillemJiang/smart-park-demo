@@ -9,7 +9,7 @@
 
 
 
-![image-system](image-system.png)
+![image-system](./image-system.png)
 
 
 
